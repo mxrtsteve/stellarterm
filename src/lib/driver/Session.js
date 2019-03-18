@@ -65,6 +65,40 @@ export default function Send(driver) {
     this.pingLedger(true);
 
     this.handlers = {
+        pingLedger: async () => {
+            try {
+                await new StellarLedger.Api(new StellarLedger.comm(4)).getPublicKey_async("44'/148'/0'");
+                this.setupLedgerError = null;
+                if (this.ledgerConnected === false) {
+                    this.ledgerConnected = true;
+                    this.event.trigger();
+                }
+                setTimeout(() => {
+                    this.handlers.pingLedger();
+                }, 10000);
+            } catch (error) {
+                if (this.ledgerConnected === true) {
+                    this.ledgerConnected = false;
+                    this.event.trigger();
+                }
+                this.setupLedgerError = error.message;
+                const u2fErrorCodes = {
+                    0: 'OK',
+                    1: 'OTHER_ERROR',
+                    2: 'BAD_REQUEST',
+                    3: 'CONFIGURATION_UNSUPPORTED',
+                    4: 'DEVICE_INELIGIBLE',
+                    5: 'UNABLE TO COMMUNICATE DEVICE',
+                };
+                this.setupLedgerError = error.errorCode ? u2fErrorCodes[error.errorCode] : error;
+                // Checking for ledger autolocking
+                this.setupLedgerError =
+                    error === 'Invalid status 6804' ? 'Ledger locked after idle timeout' : this.setupLedgerError;
+                setTimeout(() => {
+                    this.handlers.pingLedger();
+                }, 1000);
+            }
+        },
         logInWithSecret: async (secretKey) => {
             const keypair = StellarSdk.Keypair.fromSecret(secretKey);
             return this.handlers.logIn(keypair, {
@@ -89,19 +123,7 @@ export default function Send(driver) {
                     bip32Path,
                 });
             } catch (error) {
-                this.setupLedgerError = error.message;
-                if (error && error.errorCode) {
-                    const u2fErrorCodes = {
-                        0: 'OK',
-                        1: 'OTHER_ERROR',
-                        2: 'BAD_REQUEST',
-                        3: 'CONFIGURATION_UNSUPPORTED',
-                        4: 'DEVICE_INELIGIBLE',
-                        5: 'TIMEOUT (unable to communicate with device)',
-                    };
-                    this.setupLedgerError = u2fErrorCodes[error.errorCode];
-                }
-                this.event.trigger();
+                this.handlers.pingLedger();
             }
         },
         logIn: async (keypair, opts) => {
@@ -426,4 +448,5 @@ export default function Send(driver) {
             }
         },
     };
+    this.handlers.pingLedger();
 }

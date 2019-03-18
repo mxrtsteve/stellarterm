@@ -94,7 +94,7 @@ ul.privacy__ul {
 @import 'MultisigSubmitModal';
 @import 'MultisigUnknownSubmitModal';
 @import 'CopyButton';
-@import 'TransactionSummary';
+@import 'TransactionDetails';
 
 @import 'LoginPage';
 @import "SecurityPhrase";
@@ -115,3 +115,20 @@ ul.privacy__ul {
 
 @import "CopyButton";
 @import "../components/Components";
+
+@import "CopyButton";
+@import "../components/Components";
+@import 'Session';
+@import 'AccountView';
+@import 'HistoryView';
+@import 'MinBalance';
+@import 'BalancesTable';
+@import 'HistoryTable';
+@import 'ManageCurrentTrust';
+@import 'Send';
+@import 'Inflation';
+@import 'AddTrust';
+@import 'AddTrustRow';
+@import 'Deposit';
+@import 'OpenUp';
+@import 'LedgerPopup';
