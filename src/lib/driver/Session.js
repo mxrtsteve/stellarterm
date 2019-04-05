@@ -129,6 +129,9 @@ export default function Send(driver) {
 
                 // Search for user federation
                 await this.handlers.searchFederation(this.account.accountId());
+
+                this.account.addUnknownAssetData();
+
                 this.event.trigger();
             } catch (e) {
                 if (e.data) {
