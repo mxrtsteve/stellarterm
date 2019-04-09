@@ -98,19 +98,19 @@ ul.privacy__ul {
 
 @import 'LoginPage';
 @import "SecurityPhrase";
-@import 'Session';
-@import 'AccountView';
-@import 'HistoryView';
-@import 'MinBalance';
-@import 'BalancesTable';
-@import 'HistoryTable';
-@import 'ManageCurrentTrust';
-@import 'Send';
-@import 'Inflation';
-@import 'AddTrust';
-@import 'AddTrustRow';
-@import 'Deposit';
-@import 'OpenUp';
+@import "Session";
+@import "AccountView";
+@import "HistoryView";
+@import "MinBalance";
+@import "BalancesTable";
+@import "HistoryTable";
+@import "ManageCurrentTrust";
+@import "Send";
+@import "Inflation";
+@import "AddTrust";
+@import "AddTrustRow";
+@import "Deposit";
+@import "OpenUp";
 @import 'ErrorBoundary';
 
 @import 'CopyButton';

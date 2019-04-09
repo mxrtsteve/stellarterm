@@ -115,6 +115,9 @@ export default function Send(driver) {
                 this.account = await MagicSpoon.Account(driver.Server, keypair, opts, () => {
                     this.event.trigger();
                 });
+                // Search for user federation
+                await this.handlers.searchFederation(this.account.accountId());
+
                 this.state = 'in';
                 this.authType = opts.authType;
 
@@ -126,9 +129,6 @@ export default function Send(driver) {
                 if (inflationDoneDestinations[this.account.inflation_destination]) {
                     this.inflationDone = true;
                 }
-
-                // Search for user federation
-                await this.handlers.searchFederation(this.account.accountId());
 
                 this.account.addUnknownAssetData();
 
