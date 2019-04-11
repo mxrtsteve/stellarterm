@@ -123,8 +123,12 @@ const MagicSpoon = {
                     sdkAccount.balances = res.balances;
                     sdkAccount.subentry_count = res.subentry_count;
                     sdkAccount.updateOffers();
-                    sdkAccount.signers = res.signers;
+
                     updated = true;
+                }
+
+                if (!_.isEqual(sdkAccount.signers, res.signers)) {
+                    sdkAccount.signers = res.signers;
                 }
 
                 // We shouldn't pull latest sequence number.
@@ -463,20 +467,13 @@ const MagicSpoon = {
 
         return transaction;
     },
-    buildTxSetInflation(spoonAccount, inflationDest) {
+    buildTxSetOptions(spoonAccount, opts) {
+        const options = Array.isArray(opts) ? opts : [opts];
         let transaction = new StellarSdk.TransactionBuilder(spoonAccount, { fee });
-        transaction = transaction.addOperation(StellarSdk.Operation.setOptions({
-            inflationDest,
-        }));
-    // DONT call .build()
 
-        return transaction;
-    },
-    buildTxSetHomeDomain(spoonAccount) {
-        let transaction = new StellarSdk.TransactionBuilder(spoonAccount, { fee });
-        transaction = transaction.addOperation(StellarSdk.Operation.setOptions({
-            homeDomain: 'stellarterm.com',
-        }));
+        options.forEach((option) => {
+            transaction = transaction.addOperation(StellarSdk.Operation.setOptions(option));
+        });
         // DONT call .build()
 
         return transaction;

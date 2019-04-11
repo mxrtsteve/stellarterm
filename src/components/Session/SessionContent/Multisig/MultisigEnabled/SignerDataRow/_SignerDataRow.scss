@@ -1,0 +1,29 @@
+.SignerDataRow{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .SignerDataRow_data{
+        width: 85%;
+        display: flex;
+        justify-content: space-between;
+
+        .SignerDataRow_type{
+            width: 155px;
+        }
+        .SignerDataRow_key{
+            width: 500px;
+        }
+        .SignerDataRow_weight{
+            width: 20px;
+            font-weight: bold;
+        }
+    }
+
+}
+
+
+

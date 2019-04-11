@@ -1,0 +1,32 @@
+.MultisigEnableStep1{
+    width: 450px;
+    height: 450px;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+
+    .MultisigEnableStep1_images{
+        margin-top: 50px;
+        width: 100%;
+        padding: 30px 0;
+        display: flex;
+        justify-content: space-evenly;
+        background: #f6f9fa;
+
+        .MultisigEnableStep1_mobile{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
+
+    .MultisigEnableStep1_buttons{
+        width: 100%;
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+}

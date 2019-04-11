@@ -1,0 +1,22 @@
+@import "./MultisigEnableStep1/MultisigEnableStep1";
+@import "./MultisigEnableStep2/MultisigEnableStep2";
+
+.MultisigDisabled{
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.MultisigDisabled_row{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.MultisigDisabled_hint{
+    font-size: 0.8em;
+    margin-bottom: 20px;
+}

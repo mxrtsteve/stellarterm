@@ -9,6 +9,7 @@ import Trust from './Trust/Trust';
 import Send from './Send/Send';
 import SessionAccountMenu from './SessionAccountMenu/SessionAccountMenu';
 import SessionAccount from './SessionAccount/SessionAccount';
+import Multisig from './Multisig/Multisig';
 
 export default function SessionContent(props) {
     const routePath = props.route;
@@ -35,6 +36,13 @@ export default function SessionContent(props) {
         content = (
                 <ErrorBoundary>
                     <Inflation d={d} />
+                </ErrorBoundary>
+            );
+        break;
+    case 'multisig':
+        content = (
+                <ErrorBoundary>
+                    <Multisig d={d} />
                 </ErrorBoundary>
             );
         break;

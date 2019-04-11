@@ -15,6 +15,14 @@ export const endpoints = {
         url: 'federation/manage/',
         baseUrl: EnvConsts.FEDERATION_API_URL,
     },
+    isVaultSigner: {
+        url: 'check-user/',
+        baseUrl: EnvConsts.LOBSTR_VAULT_URL,
+    },
+    sendTransactionToVault: {
+        url: 'transactions/',
+        baseUrl: EnvConsts.LOBSTR_VAULT_URL,
+    },
 };
 
 export function getEndpoint(endpointName, params) {

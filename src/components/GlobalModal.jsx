@@ -4,6 +4,10 @@ import TransactionSummary from './TransactionSummary';
 import SignWithLedgerModal from './SignWithLedgerModal';
 import MultisigSubmitModal from './MultisigSubmitModal';
 import MultisigUnknownSubmitModal from './MultisigUnknownSubmitModal';
+import MultisigEnableStep1
+    from './Session/SessionContent/Multisig/MultisigDisabled/MultisigEnableStep1/MultisigEnableStep1';
+import MultisigEnableStep2
+    from './Session/SessionContent/Multisig/MultisigDisabled/MultisigEnableStep2/MultisigEnableStep2';
 import Driver from '../lib/Driver';
 
 export default class GlobalModal extends React.Component {
@@ -66,6 +70,10 @@ export default class GlobalModal extends React.Component {
             body = <MultisigSubmitModal signer={modal.inputData} submit={d.modal.handlers} />;
         } else if (modal.modalName === 'multisigUnknown') {
             body = <MultisigUnknownSubmitModal tx={modal.inputData} submit={d.modal.handlers} />;
+        } else if (modal.modalName === 'multisigEnableStep1') {
+            body = <MultisigEnableStep1 submit={d.modal.handlers} d={modal.inputData} />;
+        } else if (modal.modalName === 'multisigEnableStep2') {
+            body = <MultisigEnableStep2 submit={d.modal.handlers} d={modal.inputData} />;
         } else {
             body = (
                 <div className="GlobalModal">

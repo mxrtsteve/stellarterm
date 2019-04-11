@@ -1,0 +1,40 @@
+.MultisigEnableStep2{
+    width: 450px;
+    height: 450px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.MultisigEnableStep2_error{
+    color: $s-color-alert;
+}
+.MultisigEnableStep2_vault{
+    color: $s-color-success;
+    font-weight: bold;
+}
+.MultisigEnableStep2_input{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+
+    input{
+        width: 100%;
+    }
+
+    select{
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+.MultisigEnableStep2_buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
