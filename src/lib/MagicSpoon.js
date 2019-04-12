@@ -151,6 +151,18 @@ const MagicSpoon = {
             sdkAccount.applyNewBalances(newAccount.balances);
             sdkAccount.inflation_destination = newAccount.inflation_destination;
             sdkAccount.subentry_count = newAccount.subentry_count;
+            sdkAccount.applyNewSigners(newAccount.signers);
+        };
+
+        sdkAccount.applyNewSigners = (newSigners) => {
+            let updated = false;
+            if (!_.isEqual(sdkAccount.signers, newSigners)) {
+                sdkAccount.balances = newSigners;
+                updated = true;
+            }
+            if (updated) {
+                onUpdate();
+            }
         };
 
         sdkAccount.applyNewBalances = (newBalances) => {
