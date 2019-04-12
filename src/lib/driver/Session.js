@@ -306,15 +306,19 @@ export default function Send(driver) {
                 .catch(e => console.error(e));
         },
 
-        isInvalidVaultWeigth: () => {
+        isInvalidWeigth: () => {
             const vaultMarker = this.handlers.getSignerMarker('lobstrVault');
+            const guardMarker = this.handlers.getSignerMarker('stellarGuard');
             let hasCustomWeigth = false;
             let markerMiss = true;
             this.account.signers.forEach((signer) => {
-                if (signer.key === vaultMarker) {
+                if (signer.key === vaultMarker || signer.key === guardMarker) {
                     markerMiss = false;
                 }
                 if (signer.key === vaultMarker && signer.weight !== 1) {
+                    hasCustomWeigth = true;
+                }
+                if (signer.key === guardMarker && signer.weight !== 1) {
                     hasCustomWeigth = true;
                 }
                 if (signer.key !== vaultMarker && signer.weight !== 10) {
@@ -332,7 +336,7 @@ export default function Send(driver) {
                 if (signers.find(signer => signer.key === key)) {
                     return Promise.reject('This key is already used');
                 }
-                if (this.handlers.isInvalidVaultWeigth()) {
+                if (this.handlers.isInvalidWeigth()) {
                     return Promise.reject('Custom signers weigth');
                 }
                 const newThreshold = signers.length * 10;
@@ -400,6 +404,10 @@ export default function Send(driver) {
                     return this.handlers.buildSignSubmit(tx);
                 }
 
+                if (this.handlers.isInvalidWeigth()) {
+                    return Promise.reject('Custom signers weigth');
+                }
+
                 const markerKey = (hasVaultMarker && hasVaultMarker.key) || (hasGuardMarker && hasGuardMarker.key);
                 const markerData = {
                     signer: {
@@ -411,7 +419,7 @@ export default function Send(driver) {
                 return this.handlers.buildSignSubmit(txMarker);
             }
             if (signers.length >= 4) {
-                if (this.handlers.isInvalidVaultWeigth()) {
+                if (this.handlers.isInvalidWeigth()) {
                     return Promise.reject('Custom signers weigth');
                 }
                 const newThreshold = (signers.length - 2) * 10;
