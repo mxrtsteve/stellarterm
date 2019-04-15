@@ -271,7 +271,7 @@ export default function Send(driver) {
                     logo: 'sign-vault',
                 },
                 [this.handlers.getSignerMarker('stellarGuard')]: {
-                    apiUrl: 'https://stellarguard.me/api/transactions',
+                    apiUrl: getEndpoint('sendTransactionToGuard'),
                     title: 'StellarGuard',
                     logo: 'sign-stellarguard',
                 },
@@ -368,12 +368,21 @@ export default function Send(driver) {
                         weight: 1,
                     },
                 };
+
                 const txMarker = MagicSpoon.buildTxSetOptions(this.account, [signerData, markerData]);
                 return this.handlers.buildSignSubmit(txMarker);
             }
 
             const tx = MagicSpoon.buildTxSetOptions(this.account, signerData);
             return this.handlers.buildSignSubmit(tx);
+        },
+
+        activateGuardSigner: () => {
+            const guardUrl = getEndpoint('activateGuardSigner') + this.account.account_id.toString();
+            request
+                .post(guardUrl)
+                .then(() => {})
+                .catch(e => console.error(e));
         },
 
         removeSigner: (key) => {

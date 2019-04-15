@@ -23,6 +23,14 @@ export const endpoints = {
         url: 'transactions/',
         baseUrl: EnvConsts.LOBSTR_VAULT_URL,
     },
+    sendTransactionToGuard: {
+        url: 'transactions/',
+        baseUrl: EnvConsts.STELLAR_GUARD_URL,
+    },
+    activateGuardSigner: {
+        url: 'accounts/',
+        baseUrl: EnvConsts.STELLAR_GUARD_URL,
+    },
 };
 
 export function getEndpoint(endpointName, params) {

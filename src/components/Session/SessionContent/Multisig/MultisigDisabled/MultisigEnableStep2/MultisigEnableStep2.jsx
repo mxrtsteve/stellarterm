@@ -61,7 +61,7 @@ export default class MultisigEnableStep2 extends React.Component {
         }
     }
 
-    addSigner() {
+    async addSigner() {
         if (!this.state.valid) {
             this.setState({
                 inputError: 'Please, input correct Stellar public Key!',
@@ -88,12 +88,17 @@ export default class MultisigEnableStep2 extends React.Component {
             });
             return;
         }
-
-        this.props.d.session.handlers.addSigner(this.state.publicKey, key)
-            .then(() => this.props.submit.cancel())
-            .catch((e) => {
-                this.setState({ inputError: e });
-            });
+        try {
+            const result = await this.props.d.session.handlers.addSigner(this.state.publicKey, key);
+            if (result.status === 'finish' && key === 'stellarGuard') {
+                result.serverResult.then(() => {
+                    this.props.d.session.handlers.activateGuardSigner();
+                });
+            }
+            this.props.submit.cancel();
+        } catch (error) {
+            this.setState({ inputError: error });
+        }
     }
 
     render() {
