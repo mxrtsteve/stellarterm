@@ -1,9 +1,7 @@
 import _ from 'lodash';
-
 import MagicSpoon from '../MagicSpoon';
 import Event from '../Event';
 import * as request from '../api/request';
-import * as EnvConsts from '../../env-consts';
 import { getEndpoint } from '../api/endpoints';
 
 const StellarLedger = window.StellarLedger;
@@ -321,7 +319,7 @@ export default function Send(driver) {
                 if (signer.key === guardMarker && signer.weight !== 1) {
                     hasCustomWeigth = true;
                 }
-                if (signer.key !== vaultMarker && signer.weight !== 10) {
+                if (signer.key !== vaultMarker && signer.key !== guardMarker && signer.weight !== 10) {
                     hasCustomWeigth = true;
                 }
             });
