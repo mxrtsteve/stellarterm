@@ -63,10 +63,10 @@ export default function AssetCard2(props) {
     }
 
     return props.inRow ? (
-        <div className="AssetRow">
+        <span className="AssetRow">
             <img className="Row_logo" src={anchor.logo} alt={anchor.name} />
             <span>{`${asset.code} — ${asset.domain}`}</span>
-        </div>
+        </span>
     ) : (
         <div className={assetCardClass} style={borderStyle}>
             <AssetCardMain

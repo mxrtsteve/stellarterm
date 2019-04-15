@@ -29,7 +29,15 @@
                 color: $s-color-neutral5;
             }
 
+            .Inline_attr{
+                width: 50px;
+                display: inline-block;
+                font-size: $s-scale-5;
+                color: $s-color-neutral5;
+            }
+
             .Inline_title {
+                display: inline-block;
                 font-size: $s-scale-5;
                 color: $s-color-neutral5;
             }

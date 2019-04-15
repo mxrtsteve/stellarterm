@@ -78,7 +78,7 @@ export default class TransactionDetails extends React.Component {
         case 'changeTrust':
             return op.limit === '0' ? 'Remove Asset' : 'Accept Asset';
         case 'manageOffer':
-            return op.amount === '0' ? 'Delete Offer' : null;
+            return op.amount === '0' ? 'Delete Offer' : 'ManageOffer';
         default:
             break;
         }
@@ -97,10 +97,10 @@ export default class TransactionDetails extends React.Component {
                     this.constructor.generateTableRow(
                         label,
                         attributes.map(attribute => (
-                            <article key={attribute.key}>
-                                {attribute.name ? <span className="Inline_title">{attribute.name}</span> : null}
-                                <div className="Inline_content">{attribute.display}</div>
-                            </article>
+                            <div className="Inline_content" key={attribute.key}>
+                                {attribute.display}
+                                {attribute.name ? <span className="Inline_attr">{attribute.name}</span> : null}{' '}
+                            </div>
                         )),
                     ),
                 );
